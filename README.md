@@ -4,9 +4,17 @@ Database Project (Thực hành cơ sở dữ liệu)
 
 # How to run: 
   1. Set up virtual environment (Thiết lập môi trường ảo):
+  - On Mac/Linux:
   ```
+    $ pip install virtualenv
     $ virtualenv env
     $ source env/bin/activate
+  ```
+  - On Windows:
+  ```
+    $ pip install virtualenv
+    $ (python -m) virtualenv env
+    $ env\Scripts\activate
   ```
   2. Install all the requirements (Cài đặt các tools cần thiết):
   ```
