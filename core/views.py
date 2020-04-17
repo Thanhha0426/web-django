@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
+from django.db.models import Q
 
 import random
 import string
@@ -16,8 +17,30 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+def search(request):
+    if request.method == 'GET':
+        query = request.GET.get('search')
+        if query is not None:
+            lookups = Q(title__icontains=query) | Q(description__icontains=query)
+            items = Item.objects.filter(lookups).distinct()
+
+            context = {'items': items}
+
+            return render(request, 'search_results.html', context)
+
+        else:
+            return render(request, 'search_results.html')
+
+    else:
+        return render(request, 'home.html')
+
+
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+
+
+def AboutUs(request):
+    return render(request, "aboutus.html")
 
 
 def products(request):
@@ -347,6 +370,18 @@ class HomeView(ListView):
     model = Item
     paginate_by = 10
     template_name = "home.html"
+
+
+class PaymentHistoryView(ListView):
+    context_object_name = 'name'
+    template_name = 'payment_history.html'
+    queryset = Payment.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(PaymentHistoryView, self).get_context_data(**kwargs)
+        context['orders'] = Order.objects.all()
+        context['payments'] = self.queryset
+        return context
 
 
 class OrderSummaryView(LoginRequiredMixin, View):

@@ -1,7 +1,8 @@
 from .base import *
 
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
+# ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS += [
     'debug_toolbar'
@@ -43,5 +44,5 @@ DATABASES = {
     }
 }
 
-STRIPE_PUBLIC_KEY = ''
-STRIPE_SECRET_KEY = ''
+STRIPE_PUBLIC_KEY = 'pk_test_U1JHxqzDaI1kj0uqXjciTHwh00wbiTlv8c'
+STRIPE_SECRET_KEY = 'sk_test_lUt0uTdQweTCAs6v2Z0Qtoks00uwFwiVew'
