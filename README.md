@@ -26,9 +26,12 @@ Database Project (Thực hành cơ sở dữ liệu)
   ```
   4. Open in browser (Mở trên trình duyệt web):
   ```
-    $ Type in the url: http://127.0.0.1:8000 
+    http://127.0.0.1:8000 
   ```
-
+  5. End the server (Kết thúc server):
+  ```
+    [In terminal] Ctrl/Command + C 
+  ```
 ![alt text](https://github.com/Thanhha0426/web-django/blob/master/thumbnail.png "logo")
 
 
